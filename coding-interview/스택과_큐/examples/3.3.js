@@ -19,19 +19,27 @@ class SetOfStacks {
     }
 
     const value = this.stacks[this.stacks.length - 1].pop();
-    if (this.stacks[this.stacks.length - 1].length === 0) this.stacks.pop();
+    if (this.stacks[this.stacks.length - 1].size() === 0) this.stacks.pop();
 
     return value;
   }
   push(value) {
+    console.log(this.stacks);
     if (
       this.stacks.length === 0 ||
-      this.stacks[this.stacks.length - 1].length === this.capacity - 1
+      this.stacks[this.stacks.length - 1].size() === this.capacity
     ) {
       this.stacks.push(new Stack());
     }
 
     this.stacks[this.stacks.length - 1].push(value);
+  }
+  popAt(idx) {
+    if (idx < 0 || idx >= this.stacks.length || this.stacks[idx].size() === 0) {
+      return null;
+    }
+
+    return this.stacks[idx].pop();
   }
 }
 
@@ -41,5 +49,14 @@ stack.push(1);
 stack.push(2);
 stack.push(3);
 stack.push(4);
-console.log(stack.pop());
-console.log(stack.pop());
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+stack.push(1);
+stack.push(2);
+stack.push(3);
+stack.push(4);
+
+console.log(stack.popAt(0));
+console.log(stack.popAt(1));
